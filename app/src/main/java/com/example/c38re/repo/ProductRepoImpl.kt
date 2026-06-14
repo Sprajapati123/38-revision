@@ -100,12 +100,21 @@ class ProductRepoImpl : ProductRepo {
         callback: (Boolean, List<ProductModel>?) -> Unit
     ) {
         ref.orderByChild("isActive").equalTo(isActive).addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(p0: DataSnapshot) {
-                TODO("Not yet implemented")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    var allProducts = mutableListOf<ProductModel>()
+                    for(data in snapshot.children){
+                        val product = data.getValue(ProductModel::class.java)
+                        product?.let {
+                            allProducts.add(it)
+                        }
+                    }
+                    callback(true,allProducts)
+                }
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("Not yet implemented")
+                callback(false,emptyList())
             }
         })
     }
@@ -115,12 +124,21 @@ class ProductRepoImpl : ProductRepo {
         callback: (Boolean, List<ProductModel>?) -> Unit
     ) {
         ref.orderByChild("productName").startAt(name).addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(p0: DataSnapshot) {
-                TODO("Not yet implemented")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    var allProducts = mutableListOf<ProductModel>()
+                    for(data in snapshot.children){
+                        val product = data.getValue(ProductModel::class.java)
+                        product?.let {
+                            allProducts.add(it)
+                        }
+                    }
+                    callback(true,allProducts)
+                }
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("Not yet implemented")
+                callback(false,emptyList())
             }
         })
     }
@@ -130,12 +148,21 @@ class ProductRepoImpl : ProductRepo {
         callback: (Boolean, List<ProductModel>?) -> Unit
     ) {
         ref.orderByChild("categoryId").equalTo(categoryID).addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(p0: DataSnapshot) {
-                TODO("Not yet implemented")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    var allProducts = mutableListOf<ProductModel>()
+                    for(data in snapshot.children){
+                        val product = data.getValue(ProductModel::class.java)
+                        product?.let {
+                            allProducts.add(it)
+                        }
+                    }
+                    callback(true,allProducts)
+                }
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("Not yet implemented")
+                callback(false,emptyList())
             }
         })
     }
