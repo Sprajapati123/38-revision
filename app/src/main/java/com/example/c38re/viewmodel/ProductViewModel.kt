@@ -70,7 +70,17 @@ class ProductViewModel(val repo: ProductRepo) : ViewModel(){
     }
 
     fun getAllProduct(){
-
+        _loading.value = true
+        repo.getAllProduct {
+                success,data->
+            if(success){
+                _allProducts.value = data
+                _loading.value = false
+            }else{
+                _allProducts.value = emptyList()
+                _loading.value = false
+            }
+        }
     }
 
     fun filterProduct(isActive: Boolean){
