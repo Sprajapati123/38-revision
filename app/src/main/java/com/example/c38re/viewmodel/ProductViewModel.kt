@@ -53,11 +53,20 @@ class ProductViewModel(val repo: ProductRepo) : ViewModel(){
     val loading : MutableLiveData<Boolean> get() = _loading
 
 
-
     fun getProductById(
         id: String,
     ){
-
+        _loading.value = true
+        repo.getProductById(id){
+            success,data->
+            if(success){
+               _products.value = data
+                _loading.value = false
+            }else{
+                _products.value = null
+                _loading.value = false
+            }
+        }
     }
 
     fun getAllProduct(){
