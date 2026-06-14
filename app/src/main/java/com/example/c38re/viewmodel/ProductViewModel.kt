@@ -48,6 +48,9 @@ class ProductViewModel(val repo: ProductRepo) : ViewModel(){
     private val _searchProducts = MutableLiveData<List<ProductModel>?>()
     val searchProducts : MutableLiveData<List<ProductModel>?> get() = _searchProducts
 
+    //loading
+    private val _loading = MutableLiveData<Boolean>()
+    val loading : MutableLiveData<Boolean> get() = _loading
 
 
 
