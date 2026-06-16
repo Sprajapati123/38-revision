@@ -1,5 +1,6 @@
 package com.example.c38re.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,6 +49,12 @@ class AddProductActivity : ComponentActivity() {
 
 @Composable
 fun AddProductBody() {
+
+    val context = LocalContext.current
+    val activity = context as Activity
+
+//    var id = context.intent.getStringExtra("id")
+//
     var name by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -141,6 +149,7 @@ fun AddProductBody() {
                     productViewModel.addProduct(model) { success, messsage ->
                         if (success) {
                             loading = false
+                            activity.finish()
                         } else {
                             loading = false
                         }
